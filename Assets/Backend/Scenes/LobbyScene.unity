@@ -514,6 +514,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3333968815134367051, guid: fafe01fffde086e41bf94af30c40dee6, type: 3}
+      propertyPath: gamePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3333968815134367051, guid: fafe01fffde086e41bf94af30c40dee6, type: 3}
+      propertyPath: gamePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4982131154141529049, guid: 3ae4f9a55b432ed47bceb2e705893dd8, type: 3}
+    - target: {fileID: 3333968815134367051, guid: fafe01fffde086e41bf94af30c40dee6, type: 3}
+      propertyPath: gamePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4780297452280078487, guid: b8f380dbe457d0845bc1c55021031598, type: 3}
     - target: {fileID: 3333968815134367060, guid: fafe01fffde086e41bf94af30c40dee6, type: 3}
       propertyPath: sceneViewId
       value: 1

@@ -10,33 +10,18 @@ namespace Backend.Scripts
 {
     public class RoomController : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private GameObject onlinePlayerReference;
+        [SerializeField] private GameObject[] gamePrefabs;
         [SerializeField] private PhotonView photonView;
         [SerializeField] private int multiplayerScene;
 
         private int currentScene;
-        private DefaultPool poolPrefab;
         
         public static RoomController GameRoomController;
 
         private void Awake()
         {
-            poolPrefab = PhotonNetwork.PrefabPool as DefaultPool;
-            poolPrefab.ResourceCache.Add(onlinePlayerReference.name, onlinePlayerReference);
-            
-            if (RoomController.GameRoomController == null)
-            {
-                RoomController.GameRoomController = this;
-            }
-            else
-            {
-                if (RoomController.GameRoomController != this)
-                {
-                    Destroy(RoomController.GameRoomController.gameObject);
-                    RoomController.GameRoomController = this;
-                }
-            }
-            DontDestroyOnLoad(this.gameObject);
+            LoadPrefabsToResourcesCash();
+            InitializeRoomComponent();
         }
 
         private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
@@ -51,7 +36,7 @@ namespace Backend.Scripts
         private void CreatePlayer()
         {
             PhotonNetwork.Instantiate(
-                onlinePlayerReference.name,
+                "OnlinePlayerReference",
                 transform.position,
                 quaternion.identity,
                 0
@@ -64,6 +49,36 @@ namespace Backend.Scripts
                 return;
             
             PhotonNetwork.LoadLevel(multiplayerScene);
+        }
+
+        private void LoadPrefabsToResourcesCash()
+        {
+            DefaultPool poolPrefab = PhotonNetwork.PrefabPool as DefaultPool;
+            
+            if ((poolPrefab != null) && (gamePrefabs != null))
+            {
+                foreach(GameObject prefab in gamePrefabs)
+                {
+                    poolPrefab.ResourceCache.Add(prefab.name, prefab);
+                }
+            }
+        }
+
+        private void InitializeRoomComponent()
+        {
+            if (RoomController.GameRoomController == null)
+            {
+                RoomController.GameRoomController = this;
+            }
+            else
+            {
+                if (RoomController.GameRoomController != this)
+                {
+                    Destroy(RoomController.GameRoomController.gameObject);
+                    RoomController.GameRoomController = this;
+                }
+            }
+            DontDestroyOnLoad(this.gameObject);
         }
 
         public override void OnEnable()
