@@ -14,9 +14,10 @@ namespace Backend.Scripts
         {
             if (photonView.IsMine)
             {
-                int index = GameSetupController.GameSetup.spawnPositionArray;
-                Debug.Log(index);
+                int index = RoomController.GameRoomController.spawnPositionArray;
                 Transform[] positions = GameSetupController.GameSetup.playersSpawnPoints;
+
+                RoomController.GameRoomController.spawnPositionArray += 1;
                 
                 mySelectedAvatar = PhotonNetwork.Instantiate(
                     "PlayerCharacter",
@@ -24,8 +25,6 @@ namespace Backend.Scripts
                     positions[index].rotation,
                     0
                 );
-
-                GameSetupController.GameSetup.IncreaseSpawnPosition();
             }
         }
     }

@@ -8,7 +8,6 @@ namespace Backend.Scripts
     {
         public static GameSetupController GameSetup;
 
-        public int spawnPositionArray = 0;
         public Transform[] playersSpawnPoints;
         
         private void OnEnable()
@@ -17,16 +16,6 @@ namespace Backend.Scripts
             {
                 GameSetupController.GameSetup = this;
             }
-        }
-
-        public void IncreaseSpawnPosition()
-        {
-            spawnPositionArray++;
-        }
-        
-        public void DecreaseSpawnPosition()
-        {
-            spawnPositionArray--;
         }
     }
 }
