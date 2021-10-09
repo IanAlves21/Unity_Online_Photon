@@ -10,15 +10,20 @@ namespace Backend.Scripts
 {
     public class RoomController : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private GameObject onlinePlayerReference;
         [SerializeField] private PhotonView photonView;
         [SerializeField] private int multiplayerScene;
 
         private int currentScene;
+        private DefaultPool poolPrefab;
         
         public static RoomController GameRoomController;
 
         private void Awake()
         {
+            poolPrefab = PhotonNetwork.PrefabPool as DefaultPool;
+            poolPrefab.ResourceCache.Add(onlinePlayerReference.name, onlinePlayerReference);
+            
             if (RoomController.GameRoomController == null)
             {
                 RoomController.GameRoomController = this;
@@ -34,16 +39,6 @@ namespace Backend.Scripts
             DontDestroyOnLoad(this.gameObject);
         }
 
-        void Start()
-        {
-        
-        }
-
-        void Update()
-        {
-        
-        }
-        
         private void OnSceneFinishedLoading(Scene scene, LoadSceneMode mode)
         {
             currentScene = scene.buildIndex;
@@ -55,9 +50,8 @@ namespace Backend.Scripts
 
         private void CreatePlayer()
         {
-            Debug.Log(Path.Combine("Prefabs", "Player"));
             PhotonNetwork.Instantiate(
-                Path.Combine("Prefabs", "Player"),
+                onlinePlayerReference.name,
                 transform.position,
                 quaternion.identity,
                 0

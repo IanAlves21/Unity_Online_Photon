@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 3333968815134367060}
   multiplayerScene: 1
+  onlinePlayerReference: {fileID: 4982131154141529049, guid: 3ae4f9a55b432ed47bceb2e705893dd8, type: 3}
 --- !u!114 &3333968815134367060
 MonoBehaviour:
   m_ObjectHideFlags: 0
