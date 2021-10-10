@@ -14,8 +14,6 @@ namespace Backend.Scripts
         [SerializeField] private PhotonView photonView;
         [SerializeField] private int multiplayerScene;
 
-        public int spawnPositionArray = 0;
-
         private int currentScene;
         
         public static RoomController GameRoomController;
